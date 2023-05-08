@@ -4,11 +4,14 @@ function Locations({ locations }) {
   const sortedLocations = locations.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
-    <l>
+    <div>
       {sortedLocations.map((location, index) => (
-        <li key={index}>{location.name}</li>
+        <>
+          <button key={index}>{location.name}</button><br>
+          </br>
+        </>
       ))}
-    </l>
+    </div>
   );
 }
 
