@@ -1,9 +1,18 @@
-import React from "react";
+import React from 'react';
 
-function displayLocation(pokeData) {
+function Locations({ locations }) {
+  const sortedLocations = locations.sort((a, b) => a.name.localeCompare(b.name));
+
+  return (
     <div>
-        <h2>{}</h2>
+      {sortedLocations.map((location, index) => (
+        <>
+          <button key={index}>{location.name}</button><br>
+          </br>
+        </>
+      ))}
     </div>
+  );
 }
 
-export default displayLocation;
+export default Locations;
