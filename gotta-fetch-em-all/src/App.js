@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import Locations from './components/Locations';
+import FindSomePokemon from './components/FindSomePokemon';
 
 
 
@@ -30,6 +31,7 @@ function App() {
       ) : (
         <p>Loading selected location...</p>
       )}
+      <FindSomePokemon/>
     </div>
   );
 }
