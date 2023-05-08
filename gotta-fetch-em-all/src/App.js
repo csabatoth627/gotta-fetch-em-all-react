@@ -5,12 +5,12 @@ import Location from './components/Locations';
 
 
 function App() {
-  const [datas, setData] = useState();
+  const [data, setData] = useState();
 
 useEffect (() => {
   async function fetchEmAll () {
     try {
-      const respone = await fetch('https://pokeapi.co/api/v2/location/');
+      const respone = await fetch('https://pokeapi.co/api/v2/location?offset=0&limit=20');
       const pokeData = await respone.json();
       setData(pokeData);
       console.log(pokeData);
@@ -22,11 +22,17 @@ useEffect (() => {
   fetchEmAll();
 }, []);
 
-    return (
-      <div className="App">
-        
-      </div>
-    );
-  }
+  return (
+    <div className="App">
+      {data && (
+        <l>
+          {data.results.map((location, index) => (
+            <li key={index}>{location.name}</li>
+          ))}
+        </l>
+      )}
+    </div>
+  );
+}
 
 export default App;
