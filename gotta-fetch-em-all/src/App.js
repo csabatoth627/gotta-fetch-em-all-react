@@ -1,10 +1,11 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Location from './components/Locations';
 
 
 
 function App() {
-  const [data, setData] = useState();
+  const [datas, setData] = useState();
 
 useEffect (() => {
   async function fetchEmAll () {
@@ -23,7 +24,7 @@ useEffect (() => {
 
     return (
       <div className="App">
-
+        
       </div>
     );
   }
