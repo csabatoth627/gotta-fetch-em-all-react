@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Locations from './components/Locations';
 
 
 
@@ -23,12 +24,10 @@ useEffect (() => {
 
   return (
     <div className="App">
-      {data && (
-        <l>
-          {data.results.map((location, index) => (
-            <li key={index}>{location.name}</li>
-          ))}
-        </l>
+      {data ? (
+        <Locations locations={data.results} />
+      ) : (
+        <></>
       )}
     </div>
   );
