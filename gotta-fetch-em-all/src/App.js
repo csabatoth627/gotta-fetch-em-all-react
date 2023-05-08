@@ -1,5 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
+import Locations from './components/Locations';
 
 
 
@@ -21,9 +22,10 @@ useEffect (() => {
   fetchEmAll();
 }, []);
 
+
     return (
       <div className="App">
-
+        
       </div>
     );
   }
