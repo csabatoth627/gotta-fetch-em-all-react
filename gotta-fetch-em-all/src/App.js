@@ -33,7 +33,7 @@ function App() {
     setShowLocations(true);
     fetchEmAll();
   };
-console.log("Hello");
+
   return (
     <div className="App">
       {showLocations ? (
