@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import React from "react";
+import Fight from "./Fight";
 
 function Encounters({ locationId, onReset }) {
   const [pokemon, setPokemon] = useState("");
@@ -15,10 +15,13 @@ function Encounters({ locationId, onReset }) {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(`https://pokeapi.co/api/v2/location/${locationId}/`);
+        const response = await fetch(
+          `https://pokeapi.co/api/v2/location/${locationId}/`
+        );
         const data = await response.json();
         const locationAreas = data.areas;
-        const randomArea = locationAreas[Math.floor(Math.random() * locationAreas.length)];
+        const randomArea =
+          locationAreas[Math.floor(Math.random() * locationAreas.length)];
         const areaResponse = await fetch(randomArea.url);
         const areaData = await areaResponse.json();
 
@@ -59,8 +62,13 @@ function Encounters({ locationId, onReset }) {
     <div>
       {encounterExists ? (
         <div>
-          <p>A wild <strong>{pokemon}</strong> appeared</p>
+          <p>
+            A wild <strong>{pokemon}</strong> appeared
+          </p>
           <img src={spriteUrl} alt={pokemon} />
+          <div>
+            <Fight pokemon={{ url: "", name: pokemon }} />
+          </div>
         </div>
       ) : (
         <>
@@ -71,5 +79,6 @@ function Encounters({ locationId, onReset }) {
     </div>
   );
 }
+
 
 export default Encounters;
