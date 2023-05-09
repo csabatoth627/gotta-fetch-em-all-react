@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Fight from "./Fight";
 
-function Encounters({ locationId }) {
+function Encounters({ locationId, onReset }) {
   const [pokemon, setPokemon] = useState("");
   const [spriteUrl, setSpriteUrl] = useState("");
   const [encounterExists, setEncounterExists] = useState(false);
@@ -11,6 +11,8 @@ function Encounters({ locationId }) {
   }
 
   useEffect(() => {
+    let isMounted = true; 
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -24,27 +26,37 @@ function Encounters({ locationId }) {
         const areaData = await areaResponse.json();
 
         if (areaData.pokemon_encounters.length > 0) {
-          const randomEncounter =
-            areaData.pokemon_encounters[
-              Math.floor(Math.random() * areaData.pokemon_encounters.length)
-            ];
-          setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
+          const randomEncounter = areaData.pokemon_encounters[Math.floor(Math.random() * areaData.pokemon_encounters.length)];
 
           const pokemonResponse = await fetch(randomEncounter.pokemon.url);
           const pokemonData = await pokemonResponse.json();
 
-          setSpriteUrl(pokemonData.sprites.front_default);
-          setEncounterExists(true);
+          if (isMounted) {
+            setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
+            setSpriteUrl(pokemonData.sprites.front_default);
+            setEncounterExists(true);
+          }
         } else {
-          setEncounterExists(false);
+          if (isMounted) {
+            setEncounterExists(false);
+          }
         }
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchData();
+    setEncounterExists(false);
+    fetchData(); 
+
+    return () => {
+      isMounted = false;
+    };
   }, [locationId]);
+
+  const handleBackClick = () => {
+    onReset();
+  };
 
   return (
     <div>
@@ -59,9 +71,13 @@ function Encounters({ locationId }) {
           </div>
         </div>
       ) : (
-        <p>No pokemon found in this location</p>
+        <>
+          <p>No pokemon found in this location</p>
+          <button onClick={handleBackClick}>Back to location selection</button>
+        </>
       )}
     </div>
   );
 }
+
 export default Encounters;
