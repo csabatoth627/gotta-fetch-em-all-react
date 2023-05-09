@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import Fight from "./Fight";
+import UserPokemons from "./UserPokemons";
 
 function Encounters({ locationId, onReset }) {
   const [pokemon, setPokemon] = useState("");
@@ -64,7 +64,7 @@ function Encounters({ locationId, onReset }) {
         <div>
           <p>A wild <strong>{pokemon}</strong> appeared</p>
           <img src={spriteUrl} alt={pokemon} />
-          <div><Fight pokemon={{ url: "", name: pokemon }} /></div>
+          <div><UserPokemons pokemon={{ url: "", name: pokemon }} /></div>
         </div>
       ) : (
         <>
