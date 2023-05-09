@@ -11,7 +11,7 @@ function Encounters({ locationId, onReset }) {
   }
 
   useEffect(() => {
-    let isMounted = true; 
+    let isMounted = true;
 
     const fetchData = async () => {
       try {
@@ -47,7 +47,7 @@ function Encounters({ locationId, onReset }) {
     };
 
     setEncounterExists(false);
-    fetchData(); 
+    fetchData();
 
     return () => {
       isMounted = false;
@@ -62,13 +62,9 @@ function Encounters({ locationId, onReset }) {
     <div>
       {encounterExists ? (
         <div>
-          <p>
-            A wild <strong>{pokemon}</strong> appeared
-          </p>
+          <p>A wild <strong>{pokemon}</strong> appeared</p>
           <img src={spriteUrl} alt={pokemon} />
-          <div>
-            <Fight pokemon={{ url: "", name: pokemon }} />
-          </div>
+          <div><Fight pokemon={{ url: "", name: pokemon }} /></div>
         </div>
       ) : (
         <>
