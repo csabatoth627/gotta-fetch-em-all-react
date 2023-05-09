@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function Encounters({ locationId }) {
+function Encounters({ locationId, onReset }) {
   const [pokemon, setPokemon] = useState("");
   const [spriteUrl, setSpriteUrl] = useState("");
   const [encounterExists, setEncounterExists] = useState(false);
@@ -21,14 +21,13 @@ function Encounters({ locationId }) {
 
         if (areaData.pokemon_encounters.length > 0) {
           const randomEncounter = areaData.pokemon_encounters[Math.floor(Math.random() * areaData.pokemon_encounters.length)];
-          setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
 
           const pokemonResponse = await fetch(randomEncounter.pokemon.url);
           const pokemonData = await pokemonResponse.json();
 
+          setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
           setSpriteUrl(pokemonData.sprites.front_default);
           setEncounterExists(true);
-
         } else {
           setEncounterExists(false);
         }
@@ -37,8 +36,13 @@ function Encounters({ locationId }) {
       }
     };
 
+    setEncounterExists(false); 
     fetchData();
-  }, [locationId]);
+  }, [locationId])
+
+  const handleBackClick = () => {
+    onReset();
+  };
 
 
   return (
@@ -49,7 +53,10 @@ function Encounters({ locationId }) {
           <img src={spriteUrl} alt={pokemon} />
         </div>
       ) : (
-        <p>No pokemon found in this location</p>
+        <>
+          <p>No pokemon found in this location</p>
+          <button onClick={handleBackClick}>Back to location selection</button>
+        </>
       )}
     </div>
   );
