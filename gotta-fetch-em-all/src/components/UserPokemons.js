@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function Fight({ pokemon }) {
+function UserPokemons ({ pokemon }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
   const [selectPokemon, setSelectPokemon] = useState(null)
 
@@ -58,4 +58,4 @@ function Fight({ pokemon }) {
   );
 }
 
-export default Fight;
+export default UserPokemons;
