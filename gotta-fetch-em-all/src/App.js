@@ -3,10 +3,12 @@ import React, { useState, useEffect } from "react";
 import Locations from "./components/Locations";
 import Encounters from "./components/Encounters";
 
+
 function App() {
   const [data, setData] = useState();
   const [selectedLocation, setSelectedLocation] = useState(null);
-  const [showLocations, setShowLocations] = useState(true);
+  const [showLocations, setShowLocations] = useState(false);
+  const [showStarterScreen, setShowStarterScreen] = useState(true);
 
   const fetchEmAll = async () => {
     try {
@@ -20,8 +22,10 @@ function App() {
   };
 
   useEffect(() => {
-    fetchEmAll();
-  }, [showLocations]);
+    if (!showStarterScreen) {
+      fetchEmAll();
+    }
+  }, [showStarterScreen]);
 
   const handleLocationClick = (locationId) => {
     setSelectedLocation(locationId);
@@ -34,11 +38,27 @@ function App() {
     fetchEmAll();
   };
 
+  const handlePlayClick = () => {
+    setShowStarterScreen(false);
+    setShowLocations(true);
+  };
+
   return (
     <div className="App">
-      {showLocations ? (
+      {showStarterScreen ? (
+        <div>
+          <h1>Welcome to Nodémon!</h1>
+          <img src="Nodemon.jpg" alt="Nodemon" className="nodemon-image" />
+          <br></br>
+          <button onClick={handlePlayClick}>Press to play</button>
+        </div>
+      ) : showLocations ? (
         data ? (
-          <Locations locations={data.results} onLocationClick={handleLocationClick} />
+          <>
+            <h1>Where wouldst thou like to go?</h1>
+            <h2>Choose a location!</h2>
+            <Locations locations={data.results} onLocationClick={handleLocationClick} />
+          </>
         ) : (
           <p>Loading locations...</p>
         )
