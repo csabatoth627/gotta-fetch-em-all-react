@@ -37,3 +37,5 @@ fetch(`https://pokeapi.co/api/v2/location/${locationId}/`)
 console.log(pokemon);
 }
 export default FindSomePokemon
+
+
