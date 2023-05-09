@@ -5,6 +5,9 @@ function Encounters({ locationId, onReset }) {
   const [pokemon, setPokemon] = useState("");
   const [spriteUrl, setSpriteUrl] = useState("");
   const [encounterExists, setEncounterExists] = useState(false);
+  const [hp, setHp] = useState("");
+  const [attack, setAttack] = useState("");
+  const [defense, setDefense] = useState("");
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -34,6 +37,9 @@ function Encounters({ locationId, onReset }) {
           if (isMounted) {
             setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
             setSpriteUrl(pokemonData.sprites.front_default);
+            setHp(pokemonData.stats.find(stat => stat.stat.name === "hp").base_stat);
+            setAttack(pokemonData.stats.find(stat => stat.stat.name === "attack").base_stat);
+            setDefense(pokemonData.stats.find(stat => stat.stat.name === "defense").base_stat);
             setEncounterExists(true);
           }
         } else {
@@ -64,6 +70,9 @@ function Encounters({ locationId, onReset }) {
         <div>
           <p>A wild <strong>{pokemon}</strong> appeared</p>
           <img src={spriteUrl} alt={pokemon} />
+          <p>HP: {hp}</p>
+          <p>Attack: {attack}</p>
+          <p>Defense: {defense}</p>
           <div><UserPokemons pokemon={{ url: "", name: pokemon }} /></div>
         </div>
       ) : (
@@ -78,3 +87,4 @@ function Encounters({ locationId, onReset }) {
 
 
 export default Encounters;
+

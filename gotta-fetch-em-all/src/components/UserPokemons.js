@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function UserPokemons ({ pokemon }) {
+function UserPokemons({ pokemon }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
   const [selectPokemon, setSelectPokemon] = useState(null)
 
@@ -46,14 +46,11 @@ function UserPokemons ({ pokemon }) {
             </div>
           ))}
         </React.Fragment>
-
       ) : (
         <React.Fragment>
           <img src={selectPokemon.sprites.back_default} alt={selectPokemon.name} />
         </React.Fragment>
       )}
-
- 
     </div>
   );
 }
