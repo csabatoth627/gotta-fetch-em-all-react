@@ -10,6 +10,8 @@ function Encounters({ locationId, onReset }) {
   }
 
   useEffect(() => {
+    let isMounted = true; 
+
     const fetchData = async () => {
       try {
         const response = await fetch(`https://pokeapi.co/api/v2/location/${locationId}/`);
@@ -25,25 +27,32 @@ function Encounters({ locationId, onReset }) {
           const pokemonResponse = await fetch(randomEncounter.pokemon.url);
           const pokemonData = await pokemonResponse.json();
 
-          setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
-          setSpriteUrl(pokemonData.sprites.front_default);
-          setEncounterExists(true);
+          if (isMounted) {
+            setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
+            setSpriteUrl(pokemonData.sprites.front_default);
+            setEncounterExists(true);
+          }
         } else {
-          setEncounterExists(false);
+          if (isMounted) {
+            setEncounterExists(false);
+          }
         }
       } catch (error) {
         console.error(error);
       }
     };
 
-    setEncounterExists(false); 
-    fetchData();
-  }, [locationId])
+    setEncounterExists(false);
+    fetchData(); 
+
+    return () => {
+      isMounted = false;
+    };
+  }, [locationId]);
 
   const handleBackClick = () => {
     onReset();
   };
-
 
   return (
     <div>
@@ -61,4 +70,5 @@ function Encounters({ locationId, onReset }) {
     </div>
   );
 }
+
 export default Encounters;
