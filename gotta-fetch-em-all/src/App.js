@@ -10,7 +10,7 @@ function App() {
   const [showLocations, setShowLocations] = useState(false);
   const [showStarterScreen, setShowStarterScreen] = useState(true);
 
-  const fetchEmAll = async () => {
+  const fetchLocations = async () => {
     try {
       const response = await fetch("https://pokeapi.co/api/v2/location?offset=0&limit=20");
       const pokeData = await response.json();
@@ -23,7 +23,7 @@ function App() {
 
   useEffect(() => {
     if (!showStarterScreen) {
-      fetchEmAll();
+      fetchLocations();
     }
   }, [showStarterScreen]);
 
@@ -35,7 +35,7 @@ function App() {
   const handleReset = () => {
     setSelectedLocation(null);
     setShowLocations(true);
-    fetchEmAll();
+    fetchLocations();
   };
 
   const handlePlayClick = () => {

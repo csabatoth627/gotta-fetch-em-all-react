@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "./UserPokemons.css";
 
 function UserPokemons({ pokemon }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
@@ -33,37 +34,43 @@ function UserPokemons({ pokemon }) {
   }, []);
 
   return (
-    <div>
-      {!selectPokemon ? (
-        <React.Fragment>
-          <h2>Owned Pokemons</h2>
-          <h3>Who will you choose?</h3>
+    <>
+      <div>
+        <h2>Owned Pokemons</h2>
+      </div>
+      <div className="pokemon-deck">
+        {!selectPokemon ? (
+          <React.Fragment>
 
-          {usersPokemon.map((p) => (
-            <div key={p.id}>
-              <button
-                onClick={() => {
-                  setSelectPokemon(p);
-                }}
-              >
-                <img src={p.sprites.front_default} alt={p.name} />
-                <p>{capitalizeFirstLetter(p.name)}</p>
-                <p>HP: {p.stats[0].base_stat}</p>
-                <p>Attack Power: {p.stats[1].base_stat}</p>
-                <p>Defense: {p.stats[2].base_stat}</p>
-              </button>
-            </div>
-          ))}
-        </React.Fragment>
-      ) : (
-        <React.Fragment>
-          <img
-            src={selectPokemon.sprites.back_default}
-            alt={selectPokemon.name}
-          />
-        </React.Fragment>
-      )}
-    </div>
+            {usersPokemon.map((p) => (
+              <div key={p.id} className="pokemon-card">
+                <button
+                  onClick={() => {
+                    setSelectPokemon(p);
+                  }}
+                >
+                  <img src={p.sprites.front_default} alt={p.name} />
+                  <p>{capitalizeFirstLetter(p.name)}</p>
+                  <p>HP: {p.stats[0].base_stat}</p>
+                  <p>Attack Power: {p.stats[1].base_stat}</p>
+                  <p>Defense: {p.stats[2].base_stat}</p>
+                </button>
+              </div>
+            ))}
+          </React.Fragment>
+        ) : (
+          <React.Fragment>
+            <img
+              src={selectPokemon.sprites.back_default}
+              alt={selectPokemon.name} />
+          </React.Fragment>
+        )}
+      </div>
+      <div>
+        <h2>Who will you choose?</h2>
+        <h5>Pick one of your pokemon to start encounter</h5>
+      </div>
+    </>
   );
 }
 
