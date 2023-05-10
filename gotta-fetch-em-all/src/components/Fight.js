@@ -52,7 +52,7 @@ const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
 
   return (
     <>
-      {hasFightStarted ? null : <button onClick={startFight} disabled={isFightOver}>Start Fight!</button>}
+      {hasFightStarted ? null : <button onClick={startFight} disabled={isFightOver}>Let's GO!</button>}
     </>
   )
 }
