@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+.nodemon-image {
+  width: 550px;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 50%;
+}

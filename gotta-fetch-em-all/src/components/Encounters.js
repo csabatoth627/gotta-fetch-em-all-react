@@ -73,7 +73,15 @@ function Encounters({ locationId, onReset }) {
           <p>HP: {hp}</p>
           <p>Attack: {attack}</p>
           <p>Defense: {defense}</p>
-          <div><UserPokemons pokemon={{ url: "", name: pokemon }} /></div>
+          <div><UserPokemons 
+          pokemon={{ url: "", name: pokemon }}
+          enemyHp={hp}
+          setEnemyHp={setHp}
+          enemyAttack={attack}
+          enemySetAttack={setAttack}
+          enemyDefense={defense}
+          enemySetDefense={setDefense}
+          /></div>
         </div>
       ) : (
         <>
