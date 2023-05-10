@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense, userHp, setUserHp, userAttack, userDefense }) => {
+const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUserHp, userAttack, userDefense }) => {
   const [phase, setPhase] = useState("User Attack")
+  const [isFightOver, setIsFightOver] = useState(false)
+  const [hasFightStarted, setHasFightStarted] = useState(false);
 
   const calculateDamage = (enemyAttack, userDefense) => {
     const B = enemyAttack;
@@ -11,33 +13,47 @@ const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense,
   }
 
   const enemyAttackUser = useCallback(() => {
-    setUserHp(Math.round(userHp - calculateDamage(enemyAttack, userDefense)))
+    const newHp = Math.round(userHp - calculateDamage(enemyAttack, userDefense));
+    setUserHp(newHp >= 0 ? newHp : 0)
+    if (newHp <= 0) setIsFightOver(true)
   }, [setUserHp, userHp, enemyAttack, userDefense]);
+
+  const userAttackEnemy = useCallback(() => {
+    const newEnemyHp = Math.round(enemyHp - calculateDamage(userAttack, enemyDefense));
+    setEnemyHp(newEnemyHp >= 0 ? newEnemyHp : 0)
+    if (newEnemyHp <= 0) setIsFightOver(true)
+  }, [setEnemyHp, enemyHp, userAttack, enemyDefense]);
 
   useEffect(() => {
     let timeoutId;
-    if (phase === "Enemy Attack") {
-      timeoutId = setTimeout(() => {
-        enemyAttackUser()
-        setPhase("User Attack")
-      }, 1000);
+    if (!isFightOver) {
+      if (phase === "Enemy Attack") {
+        timeoutId = setTimeout(() => {
+          enemyAttackUser()
+          setPhase("User Attack")
+        }, 1000);
+      } else if (phase === "User Attack") {
+        timeoutId = setTimeout(() => {
+          userAttackEnemy()
+          setPhase("Enemy Attack")
+        }, 1000);
+      }
     }
-    return () => {
-      clearTimeout(timeoutId)
-    }
-  }, [enemyAttackUser, phase])
+    return () => clearTimeout(timeoutId)
+  }, [phase, isFightOver, enemyAttackUser, userAttackEnemy])
 
-
-  function UserAttack() {
-    if (phase === "User Attack") {
-      setEnemyHp(Math.round(enemyHp - calculateDamage(userAttack, enemyDefense)))
+  function startFight() {
+    setHasFightStarted(true)
+    if (!isFightOver) {
+      userAttackEnemy()
       setPhase("Enemy Attack")
     }
   }
 
   return (
-    <button onClick={UserAttack}>Attack!</button>
+    <>
+      {hasFightStarted ? null : <button onClick={startFight} disabled={isFightOver}>Start Fight!</button>}
+    </>
   )
 }
-
 export default Fight;
