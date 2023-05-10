@@ -60,7 +60,8 @@ function UserPokemons({ pokemon }) {
           <img
             src={selectPokemon.sprites.back_default}
             alt={selectPokemon.name}
-          />
+            />
+            <button>Start</button>
         </React.Fragment>
       )}
     </div>
