@@ -15,7 +15,7 @@ const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense,
         return ()=> {
             clearTimeout(timeoutId)
         }
-    }, [ene,phase])
+    }, [phase])
 
 
     function enemyAttackUser() {
