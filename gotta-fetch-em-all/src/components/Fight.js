@@ -1,47 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
-const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense, userHp, setUserHp, userAttack, userDefense}) => {
-    const [phase, setPhase] = useState("User Attack")
+const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense, userHp, setUserHp, userAttack, userDefense }) => {
+  const [phase, setPhase] = useState("User Attack")
 
+  const calculateDamage = (enemyAttack, userDefense) => {
+    const B = enemyAttack;
+    const D = userDefense;
+    const Z = Math.floor(Math.random() * (255 - 217 + 1)) + 217;
+    return ((((2 / 5 + 2) * B * 60 / D) / 50) + 2) * Z / 255;
+  }
 
-    useEffect(() => {
-        let timeoutId;
-        if (phase === "Enemy Attack") {
-            timeoutId = setTimeout(() => {
-                enemyAttackUser()
-                setPhase("User Attack")
-            }, 1000);
-        }
-        return ()=> {
-            clearTimeout(timeoutId)
-        }
-    }, [ene,phase])
+  const enemyAttackUser = useCallback(() => {
+    setUserHp(Math.round(userHp - calculateDamage(enemyAttack, userDefense)))
+  }, [setUserHp, userHp, enemyAttack, userDefense]);
 
-
-    function enemyAttackUser() {
-        const fightFormula = ((((2 / 5 + 2) * enemyAttack / userDefense) / 50) + 2) * 230 / 255
-        console.log(enemySetAttack);
-        setUserHp(Math.round(userHp - fightFormula))
+  useEffect(() => {
+    let timeoutId;
+    if (phase === "Enemy Attack") {
+      timeoutId = setTimeout(() => {
+        enemyAttackUser()
+        setPhase("User Attack")
+      }, 1000);
     }
-
-    function UserAttack() {
-        if (phase === "User Attack") {
-            const fightFormula = ((((2 / 5 + 2) * userAttack / enemyDefense) / 50) + 2) * 230 / 255
-            console.log(fightFormula);
-            setEnemyHp(Math.round(enemyHp - fightFormula))
-            setPhase("Enemy Attack")
-        }
-
-
-
+    return () => {
+      clearTimeout(timeoutId)
     }
-
-    return (
-        <button onClick={UserAttack}>Attack!</button>
-
-    )
+  }, [enemyAttackUser, phase])
 
 
+  function UserAttack() {
+    if (phase === "User Attack") {
+      setEnemyHp(Math.round(enemyHp - calculateDamage(userAttack, enemyDefense)))
+      setPhase("Enemy Attack")
+    }
+  }
+
+  return (
+    <button onClick={UserAttack}>Attack!</button>
+  )
 }
 
 export default Fight;

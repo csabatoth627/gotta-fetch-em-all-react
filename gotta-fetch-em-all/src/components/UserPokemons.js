@@ -9,10 +9,6 @@ function UserPokemons({ pokemon, enemyHp, setEnemyHp, enemyAttack, enemySetAttac
   const [userAttack, setUserAttack] = useState("");
   const [userDefense, setUserDefense] = useState("");
  
-
-
-
-
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
