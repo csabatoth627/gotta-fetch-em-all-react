@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUserHp, userAttack, userDefense }) => {
+function Fight ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUserHp, userAttack, userDefense }) {
   const [phase, setPhase] = useState("User Attack")
   const [isFightOver, setIsFightOver] = useState(false)
   const [hasFightStarted, setHasFightStarted] = useState(false);
@@ -36,19 +36,19 @@ const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
         timeoutId = setTimeout(() => {
           userAttackEnemy()
           setPhase("Enemy Attack")
-        }, 1000);
+        }, 500);
       }
     }
     return () => clearTimeout(timeoutId)
   }, [phase, isFightOver, enemyAttackUser, userAttackEnemy])
 
-  function startFight() {
+  const startFight = () => {
     setHasFightStarted(true)
     if (!isFightOver) {
       userAttackEnemy()
       setPhase("Enemy Attack")
     }
-  }
+  };
 
   return (
     <>
@@ -56,4 +56,5 @@ const Fight = ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
     </>
   )
 }
+
 export default Fight;

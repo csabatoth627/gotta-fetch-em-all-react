@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import Fight from "./Fight";
 import "./UserPokemons.css";
 
-function UserPokemons({ pokemon, enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense  }) {
+function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense  }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
   const [selectPokemon, setSelectPokemon] = useState(null);
   const [userHp, setUserHp] = useState("");
   const [userAttack, setUserAttack] = useState("");
   const [userDefense, setUserDefense] = useState("");
- 
-  function capitalizeFirstLetter(string) {
+
+  const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  };
 
   useEffect(() => {
     async function fetchPokemons() {

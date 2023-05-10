@@ -9,13 +9,13 @@ function Encounters({ locationId, onReset }) {
   const [attack, setAttack] = useState("");
   const [defense, setDefense] = useState("");
 
-  function capitalizeFirstLetter(string) {
+  const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  };
 
   useEffect(() => {
     let isMounted = true;
-
+    
     const fetchData = async () => {
       try {
         const response = await fetch(
