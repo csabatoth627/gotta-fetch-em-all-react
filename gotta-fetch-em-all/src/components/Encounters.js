@@ -9,6 +9,7 @@ function Encounters({ locationId, onReset, updatePokemon, setUpdatePokemon }) {
   const [hp, setHp] = useState("");
   const [attack, setAttack] = useState("");
   const [defense, setDefense] = useState("");
+  const [selectWildPokemon, setSelectWildPokemon] = useState(null);
 
   const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,7 +17,7 @@ function Encounters({ locationId, onReset, updatePokemon, setUpdatePokemon }) {
 
   useEffect(() => {
     let isMounted = true;
-    
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -70,31 +71,35 @@ function Encounters({ locationId, onReset, updatePokemon, setUpdatePokemon }) {
     <div>
       {encounterExists ? (
         <div>
-          <p>A wild <strong>{pokemon}</strong> appeared</p>
+          {!selectWildPokemon &&
+            <p>A wild <strong>{pokemon}</strong> appeared</p>
+          }
           <img src={spriteUrl} alt={pokemon} />
           <p>HP: {hp}</p>
           <p>Attack: {attack}</p>
           <p>Defense: {defense}</p>
-          <div><UserPokemons 
-          setUpdatePokemon={setUpdatePokemon}
-          updatePokemon={updatePokemon}
-          back={onReset}
-          pokemon={pokemonDetails }
-          enemyHp={hp}
-          setEnemyHp={setHp}
-          enemyAttack={attack}
-          enemySetAttack={setAttack}
-          enemyDefense={defense}
-          enemySetDefense={setDefense}
-          /></div>
-        </div>
+  <div><UserPokemons
+    setUpdatePokemon={setUpdatePokemon}
+    updatePokemon={updatePokemon}
+    back={onReset}
+    pokemon={pokemonDetails}
+    enemyHp={hp}
+    setEnemyHp={setHp}
+    enemyAttack={attack}
+    enemySetAttack={setAttack}
+    enemyDefense={defense}
+    enemySetDefense={setDefense}
+    setSelectWildPokemon={setSelectWildPokemon}
+  /></div>
+        </div >
       ) : (
-        <>
-          <p>No pokemon found in this location</p>
-          <button onClick={handleBackClick}>Back to location selection</button>
-        </>
-      )}
-    </div>
+    <>
+      <p>No pokemon found in this location</p>
+      <button onClick={handleBackClick}>Back to location selection</button>
+    </>
+  )
+}
+    </div >
   );
 }
 

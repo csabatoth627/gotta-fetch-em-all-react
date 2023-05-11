@@ -3,21 +3,85 @@
   margin: 0;
   padding: 0;
   text-align: center;
-  /* background-image: url(nodemonbackground.jpg); */
   background-position: center;
   background-size: cover;
   background: linear-gradient(135deg, #3B4CCA 0%, #FF0000 100%);
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  overflow: auto;
   color: white;
 
 }
-
 
 .nodemon-image {
   width: 550px;
   height: auto;
   margin: 0 auto;
   border-radius: 50%;
+}
+
+.nodemon-image:hover {
+  animation: vibrate 0.5s;
+  animation-iteration-count: infinite;
+}
+
+
+.start-button {
+  border-radius: 25px;
+  background-color: #FF0000;
+  color: white;
+  padding: 20px;
+  font-size: 30px;
+}
+
+.start-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px rgb(0, 102, 255);
+}
+
+
+@keyframes vibrate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  10% {
+    transform: rotate(-1deg);
+  }
+
+  20% {
+    transform: rotate(1deg);
+  }
+
+  30% {
+    transform: rotate(0deg);
+  }
+
+  40% {
+    transform: rotate(1deg);
+  }
+
+  50% {
+    transform: rotate(-1deg);
+  }
+
+  60% {
+    transform: rotate(0deg);
+  }
+
+  70% {
+    transform: rotate(-1deg);
+  }
+
+  80% {
+    transform: rotate(1deg);
+  }
+
+  90% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-1deg);
+  }
 }

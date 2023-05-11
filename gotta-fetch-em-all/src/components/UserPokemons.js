@@ -3,13 +3,14 @@ import Fight from "./Fight";
 import "./UserPokemons.css";
 
 
-function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense,pokemon, back ,updatePokemon, setUpdatePokemon }) {
+function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense,pokemon, back ,updatePokemon, setUpdatePokemon, setSelectWildPokemon }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
 
   const [selectPokemon, setSelectPokemon] = useState(null);
   const [userHp, setUserHp] = useState("");
   const [userAttack, setUserAttack] = useState("");
   const [userDefense, setUserDefense] = useState("");
+  const [userPokemonName, setUserPokemonName] = useState("");
 
   const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -32,7 +33,7 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
         const pokemon3 = await response3.json();
         setUsersPokemon([pokemon1, pokemon2, pokemon3]);
       } catch (error) {
-        console.error(error); 
+        console.error(error);
       }
     }
     fetchPokemons();
@@ -41,9 +42,11 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
 
   return (
     <>
-      <div>
-        <h2>Owned Pokemons</h2>
-      </div>
+      {!selectPokemon && (
+        <div>
+          <h2>Owned Pokemons</h2>
+        </div>
+      )}
       <div className="pokemon-deck">
         {!selectPokemon ? (
           <React.Fragment>
@@ -76,6 +79,8 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
                     setUserHp(p.stats[0].base_stat)
                     setUserAttack(p.stats[1].base_stat)
                     setUserDefense(p.stats[2].base_stat)
+                    setSelectWildPokemon(p)
+                    setUserPokemonName(capitalizeFirstLetter(p.name));
                   }}
                 >
                   <img src={p.sprites.front_default} alt={p.name} />
@@ -115,16 +120,18 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
             userDefense={userDefense}
             enemyPokemon={pokemon}
             onBack={back}
+            userPokemonName={userPokemonName}
 
-        
             />
           </React.Fragment>
         )}
       </div>
-      <div>
-        <h2>Who will you choose?</h2>
-        <h5>Pick one of your pokemon to start encounter</h5>
-      </div>
+      {!selectPokemon && (
+        <div>
+          <h2>Who will you choose?</h2>
+          <h5>Pick one of your pokemon to start encounter</h5>
+        </div>
+      )}
     </>
   );
 }
