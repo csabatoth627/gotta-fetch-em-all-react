@@ -8,6 +8,7 @@ function Encounters({ locationId, onReset }) {
   const [hp, setHp] = useState("");
   const [attack, setAttack] = useState("");
   const [defense, setDefense] = useState("");
+  const [selectWildPokemon, setSelectWildPokemon] = useState(null);
 
   const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -68,19 +69,22 @@ function Encounters({ locationId, onReset }) {
     <div>
       {encounterExists ? (
         <div>
-          <p>A wild <strong>{pokemon}</strong> appeared</p>
+          {!selectWildPokemon &&
+            <p>A wild <strong>{pokemon}</strong> appeared</p>
+          }
           <img src={spriteUrl} alt={pokemon} />
           <p>HP: {hp}</p>
           <p>Attack: {attack}</p>
           <p>Defense: {defense}</p>
-          <div><UserPokemons 
-          pokemon={{ url: "", name: pokemon }}
-          enemyHp={hp}
-          setEnemyHp={setHp}
-          enemyAttack={attack}
-          enemySetAttack={setAttack}
-          enemyDefense={defense}
-          enemySetDefense={setDefense}
+          <div><UserPokemons
+            pokemon={{ url: "", name: pokemon }}
+            enemyHp={hp}
+            setEnemyHp={setHp}
+            enemyAttack={attack}
+            enemySetAttack={setAttack}
+            enemyDefense={defense}
+            enemySetDefense={setDefense}
+            setSelectWildPokemon={setSelectWildPokemon}
           /></div>
         </div>
       ) : (

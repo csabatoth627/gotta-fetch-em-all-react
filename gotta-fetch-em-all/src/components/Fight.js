@@ -31,7 +31,7 @@ function Fight ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUse
         timeoutId = setTimeout(() => {
           enemyAttackUser()
           setPhase("User Attack")
-        }, 1000);
+        }, 500);
       } else if (phase === "User Attack") {
         timeoutId = setTimeout(() => {
           userAttackEnemy()
