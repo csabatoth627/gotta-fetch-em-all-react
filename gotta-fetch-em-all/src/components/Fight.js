@@ -88,7 +88,7 @@ function Fight({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
           ) : (
             <>
               <h2>You lose, choose more wisely next time</h2>
-                <button onClick={onBack}>Back to location selection</button>
+              <button onClick={onBack}>Back to location selection</button>
             </>
           )}
         </div>
