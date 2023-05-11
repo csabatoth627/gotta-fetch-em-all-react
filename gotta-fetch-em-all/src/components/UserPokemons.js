@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import Fight from "./Fight";
 import "./UserPokemons.css";
 
-function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense, setSelectWildPokemon}) {
+function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense, setSelectWildPokemon }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
   const [selectPokemon, setSelectPokemon] = useState(null);
   const [userHp, setUserHp] = useState("");
   const [userAttack, setUserAttack] = useState("");
   const [userDefense, setUserDefense] = useState("");
+  const [userPokemonName, setUserPokemonName] = useState("");
 
   const capitalizeFirstLetter = string => {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -55,6 +56,7 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
                     setUserAttack(p.stats[1].base_stat)
                     setUserDefense(p.stats[2].base_stat)
                     setSelectWildPokemon(p)
+                    setUserPokemonName(capitalizeFirstLetter(p.name));
                   }}
                 >
                   <img src={p.sprites.front_default} alt={p.name} />
@@ -84,6 +86,7 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
               setUserHp={setUserHp}
               userAttack={userAttack}
               userDefense={userDefense}
+              userPokemonName={userPokemonName}
             />
           </React.Fragment>
         )}

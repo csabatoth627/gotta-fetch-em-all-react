@@ -16,7 +16,7 @@ function Encounters({ locationId, onReset }) {
 
   useEffect(() => {
     let isMounted = true;
-    
+
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -76,16 +76,18 @@ function Encounters({ locationId, onReset }) {
           <p>HP: {hp}</p>
           <p>Attack: {attack}</p>
           <p>Defense: {defense}</p>
-          <div><UserPokemons
-            pokemon={{ url: "", name: pokemon }}
-            enemyHp={hp}
-            setEnemyHp={setHp}
-            enemyAttack={attack}
-            enemySetAttack={setAttack}
-            enemyDefense={defense}
-            enemySetDefense={setDefense}
-            setSelectWildPokemon={setSelectWildPokemon}
-          /></div>
+          <div>
+            <UserPokemons
+              pokemon={{ url: "", name: pokemon }}
+              enemyHp={hp}
+              setEnemyHp={setHp}
+              enemyAttack={attack}
+              enemySetAttack={setAttack}
+              enemyDefense={defense}
+              enemySetDefense={setDefense}
+              setSelectWildPokemon={setSelectWildPokemon}
+            />
+          </div>
         </div>
       ) : (
         <>

@@ -51,7 +51,7 @@ function App() {
           <h1>Welcome to Nodémon!</h1>
           <img src="Nodemon.jpg" alt="Nodemon" className="nodemon-image" />
           <br></br>
-          <button onClick={handlePlayClick}>Press to play</button>
+          <button onClick={handlePlayClick} className="start-button">Press to play</button>
         </div>
       ) : showLocations ? (
         data ? (
