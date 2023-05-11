@@ -11,7 +11,6 @@ function App() {
   const [showLocations, setShowLocations] = useState(false);
   const [showStarterScreen, setShowStarterScreen] = useState(true);
 
-
   const fetchLocations = async () => {
     try {
       const response = await fetch("https://pokeapi.co/api/v2/location?offset=0&limit=20");

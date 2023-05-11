@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-
 function Fight({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUserHp, userAttack, userDefense, enemyPokemon, onBack, setUpdatePokemon, usersPokemon, updatePokemon, userPokemonName }) {
   const [phase, setPhase] = useState("")
   const [isFightOver, setIsFightOver] = useState(false)
@@ -59,7 +58,6 @@ function Fight({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
   };
 
   const capturePokemon = () => {
-
     if (updatePokemon) {
       setUpdatePokemon([...updatePokemon, enemyPokemon])
       onBack()
@@ -67,8 +65,6 @@ function Fight({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
       setUpdatePokemon([...usersPokemon, enemyPokemon])
       onBack()
     }
-
-
   }
 
   return (
