@@ -4,9 +4,24 @@
   align-items: center;
   flex-wrap: wrap;
   padding: 20px;
-  background: black;
-  color:rgb(255, 255, 255);
+  background: rgb(161, 109, 109);
+  color: rgb(255, 255, 255) !important;
   font-weight: bold;
+}
+
+#fight-button {
+  border-radius: 25px;
+  color: black;
+  margin-left: 30px;
+  font-weight: bold;
+  text-align: center;
+  justify-content: center;
+}
+
+#winner-text{
+  margin-left: 30px;
+  color:white;
+  
 }
 
 .pokemon-card {
@@ -66,7 +81,7 @@
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
-  color:#f0f0f0;
+  color: #f0f0f0;
   font-size: 21;
   font-weight: bold;
 }

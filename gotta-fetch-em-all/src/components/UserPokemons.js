@@ -3,7 +3,7 @@ import Fight from "./Fight";
 import "./UserPokemons.css";
 
 
-function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense,pokemon, back ,updatePokemon, setUpdatePokemon, setSelectWildPokemon }) {
+function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyDefense, enemySetDefense, pokemon, back, updatePokemon, setUpdatePokemon, setSelectWildPokemon }) {
   const [usersPokemon, setUsersPokemon] = useState([]);
 
   const [selectPokemon, setSelectPokemon] = useState(null);
@@ -50,77 +50,77 @@ function UserPokemons({ enemyHp, setEnemyHp, enemyAttack, enemySetAttack, enemyD
       <div className="pokemon-deck">
         {!selectPokemon ? (
           <React.Fragment>
-{!updatePokemon ? (
-  <React.Fragment> {usersPokemon.map((p) => (
-              <div key={p.id} className="pokemon-card">
-                <button
-                  onClick={() => {
-                    setSelectPokemon(p);
-                    setUserHp(p.stats[0].base_stat)
-                    setUserAttack(p.stats[1].base_stat)
-                    setUserDefense(p.stats[2].base_stat)
-                    console.log("jjjj");
-                  }}
-                >
-                  <img src={p.sprites.front_default} alt={p.name} />
-                  <p>{capitalizeFirstLetter(p.name)}</p>
-                  <p>HP: {p.stats[0].base_stat}</p>
-                  <p>Attack Power: {p.stats[1].base_stat}</p>
-                  <p>Defense: {p.stats[2].base_stat}</p>
-                </button>
-              </div>
-            ))}</React.Fragment>
-) : (
-<React.Fragment> {updatePokemon.map((p) => (
-              <div key={p.id} className="pokemon-card">
-                <button
-                  onClick={() => {
-                    setSelectPokemon(p);
-                    setUserHp(p.stats[0].base_stat)
-                    setUserAttack(p.stats[1].base_stat)
-                    setUserDefense(p.stats[2].base_stat)
-                    setSelectWildPokemon(p)
-                    setUserPokemonName(capitalizeFirstLetter(p.name));
-                  }}
-                >
-                  <img src={p.sprites.front_default} alt={p.name} />
-                  <p>{capitalizeFirstLetter(p.name)}</p>
-                  <p>HP: {p.stats[0].base_stat}</p>
-                  <p>Attack Power: {p.stats[1].base_stat}</p>
-                  <p>Defense: {p.stats[2].base_stat}</p>
-                </button>
-              </div>
-            ))}</React.Fragment>
-)}
+            {!updatePokemon ? (
+              <React.Fragment> {usersPokemon.map((p) => (
+                <div key={p.id} className="pokemon-card">
+                  <button
+                    onClick={() => {
+                      setSelectPokemon(p);
+                      setUserHp(p.stats[0].base_stat)
+                      setUserAttack(p.stats[1].base_stat)
+                      setUserDefense(p.stats[2].base_stat)
+                      console.log("jjjj");
+                    }}
+                  >
+                    <img src={p.sprites.front_default} alt={p.name} />
+                    <p>{capitalizeFirstLetter(p.name)}</p>
+                    <p>HP: {p.stats[0].base_stat}</p>
+                    <p>Attack Power: {p.stats[1].base_stat}</p>
+                    <p>Defense: {p.stats[2].base_stat}</p>
+                  </button>
+                </div>
+              ))}</React.Fragment>
+            ) : (
+              <React.Fragment> {updatePokemon.map((p) => (
+                <div key={p.id} className="pokemon-card">
+                  <button
+                    onClick={() => {
+                      setSelectPokemon(p);
+                      setUserHp(p.stats[0].base_stat)
+                      setUserAttack(p.stats[1].base_stat)
+                      setUserDefense(p.stats[2].base_stat)
+                      setSelectWildPokemon(p)
+                      setUserPokemonName(capitalizeFirstLetter(p.name));
+                    }}
+                  >
+                    <img src={p.sprites.front_default} alt={p.name} />
+                    <p>{capitalizeFirstLetter(p.name)}</p>
+                    <p>HP: {p.stats[0].base_stat}</p>
+                    <p>Attack Power: {p.stats[1].base_stat}</p>
+                    <p>Defense: {p.stats[2].base_stat}</p>
+                  </button>
+                </div>
+              ))}</React.Fragment>
+            )}
 
 
 
-           
+
           </React.Fragment>
         ) : (
           <React.Fragment>
             <img
               src={selectPokemon.sprites.back_default}
-              alt={selectPokemon.name} 
-              />
-              <p><font color="black">HP: {userHp}</font></p>
-            <Fight 
-            updatePokemon={updatePokemon}
-            usersPokemon={usersPokemon}
-            setUpdatePokemon={setUpdatePokemon}
-            enemyHp={enemyHp}
-            setEnemyHp={setEnemyHp}
-            enemyAttack={enemyAttack}
-            enemySetAttack={enemySetAttack}
-            enemyDefense={enemyDefense}
-            enemySetDefense={enemySetDefense}
-            userHp={userHp}
-            setUserHp={setUserHp}
-            userAttack={userAttack}
-            userDefense={userDefense}
-            enemyPokemon={pokemon}
-            onBack={back}
-            userPokemonName={userPokemonName}
+              alt={selectPokemon.name}
+            />
+            <p>HP: {userHp}</p>
+            <Fight
+              updatePokemon={updatePokemon}
+              usersPokemon={usersPokemon}
+              setUpdatePokemon={setUpdatePokemon}
+              enemyHp={enemyHp}
+              setEnemyHp={setEnemyHp}
+              enemyAttack={enemyAttack}
+              enemySetAttack={enemySetAttack}
+              enemyDefense={enemyDefense}
+              enemySetDefense={enemySetDefense}
+              userHp={userHp}
+              setUserHp={setUserHp}
+              userAttack={userAttack}
+              userDefense={userDefense}
+              enemyPokemon={pokemon}
+              onBack={back}
+              userPokemonName={userPokemonName}
 
             />
           </React.Fragment>

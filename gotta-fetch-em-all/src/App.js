@@ -66,9 +66,9 @@ function App() {
         )
       ) : selectedLocation ? (
         <Encounters locationId={selectedLocation} onReset={handleReset}
-         updatePokemon={updatePokemon}
-         setUpdatePokemon={setUpdatePokemon}
-         />
+          updatePokemon={updatePokemon}
+          setUpdatePokemon={setUpdatePokemon}
+        />
       ) : (
         <div>
           <p>This location doesn't seem to have any pokémon</p>

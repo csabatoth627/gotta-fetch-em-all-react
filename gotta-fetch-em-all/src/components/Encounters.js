@@ -78,27 +78,27 @@ function Encounters({ locationId, onReset, updatePokemon, setUpdatePokemon }) {
           <p>HP: {hp}</p>
           <p>Attack: {attack}</p>
           <p>Defense: {defense}</p>
-  <div><UserPokemons
-    setUpdatePokemon={setUpdatePokemon}
-    updatePokemon={updatePokemon}
-    back={onReset}
-    pokemon={pokemonDetails}
-    enemyHp={hp}
-    setEnemyHp={setHp}
-    enemyAttack={attack}
-    enemySetAttack={setAttack}
-    enemyDefense={defense}
-    enemySetDefense={setDefense}
-    setSelectWildPokemon={setSelectWildPokemon}
-  /></div>
+          <div><UserPokemons
+            setUpdatePokemon={setUpdatePokemon}
+            updatePokemon={updatePokemon}
+            back={onReset}
+            pokemon={pokemonDetails}
+            enemyHp={hp}
+            setEnemyHp={setHp}
+            enemyAttack={attack}
+            enemySetAttack={setAttack}
+            enemyDefense={defense}
+            enemySetDefense={setDefense}
+            setSelectWildPokemon={setSelectWildPokemon}
+          /></div>
         </div >
       ) : (
-    <>
-      <p>No pokemon found in this location</p>
-      <button onClick={handleBackClick}>Back to location selection</button>
-    </>
-  )
-}
+        <>
+          <p>No pokemon found in this location</p>
+          <button onClick={handleBackClick}>Back to location selection</button>
+        </>
+      )
+      }
     </div >
   );
 }
