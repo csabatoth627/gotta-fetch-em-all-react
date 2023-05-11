@@ -5,6 +5,7 @@ import Encounters from "./components/Encounters";
 
 
 function App() {
+  const [updatePokemon, setUpdatePokemon] = useState(null)
   const [data, setData] = useState();
   const [selectedLocation, setSelectedLocation] = useState(null);
   const [showLocations, setShowLocations] = useState(false);
@@ -64,7 +65,10 @@ function App() {
           <p>Loading locations...</p>
         )
       ) : selectedLocation ? (
-        <Encounters locationId={selectedLocation} onReset={handleReset} />
+        <Encounters locationId={selectedLocation} onReset={handleReset}
+         updatePokemon={updatePokemon}
+         setUpdatePokemon={setUpdatePokemon}
+         />
       ) : (
         <div>
           <p>This location doesn't seem to have any pokémon</p>

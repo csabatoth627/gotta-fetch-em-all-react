@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import UserPokemons from "./UserPokemons";
 
-function Encounters({ locationId, onReset }) {
+function Encounters({ locationId, onReset, updatePokemon, setUpdatePokemon }) {
+  const [pokemonDetails, setPokemonDetails] = useState("")
   const [pokemon, setPokemon] = useState("");
   const [spriteUrl, setSpriteUrl] = useState("");
   const [encounterExists, setEncounterExists] = useState(false);
@@ -33,6 +34,7 @@ function Encounters({ locationId, onReset }) {
 
           const pokemonResponse = await fetch(randomEncounter.pokemon.url);
           const pokemonData = await pokemonResponse.json();
+          setPokemonDetails(pokemonData)
 
           if (isMounted) {
             setPokemon(capitalizeFirstLetter(randomEncounter.pokemon.name));
@@ -74,7 +76,10 @@ function Encounters({ locationId, onReset }) {
           <p>Attack: {attack}</p>
           <p>Defense: {defense}</p>
           <div><UserPokemons 
-          pokemon={{ url: "", name: pokemon }}
+          setUpdatePokemon={setUpdatePokemon}
+          updatePokemon={updatePokemon}
+          back={onReset}
+          pokemon={pokemonDetails }
           enemyHp={hp}
           setEnemyHp={setHp}
           enemyAttack={attack}

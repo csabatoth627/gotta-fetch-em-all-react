@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 
-function Fight ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUserHp, userAttack, userDefense }) {
+function Fight ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUserHp, userAttack, userDefense, enemyPokemon, onBack, setUpdatePokemon,usersPokemon,updatePokemon }) {
   const [phase, setPhase] = useState("")
   const [isFightOver, setIsFightOver] = useState(false)
   const [hasFightStarted, setHasFightStarted] = useState(false);
@@ -50,9 +50,29 @@ function Fight ({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUse
     }
   };
 
+  const capturePokemon = () => {
+
+    if (updatePokemon) {
+      setUpdatePokemon([...updatePokemon, enemyPokemon])
+      onBack()
+    }else{
+      setUpdatePokemon([...usersPokemon, enemyPokemon])
+      onBack()
+    }
+
+    
+  }
+
+
   return (
     <>
       {hasFightStarted ? null : <button onClick={startFight} disabled={isFightOver}>Let's GO!</button>}
+      {enemyHp === 0 ? (
+        <div>
+           <h1>Win!</h1>
+      <button onClick={capturePokemon}>Back</button>
+        </div>
+       ): null}
     </>
   )
 }
