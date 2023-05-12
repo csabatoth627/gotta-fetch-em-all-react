@@ -78,7 +78,11 @@ function Fight({ enemyHp, setEnemyHp, enemyAttack, enemyDefense, userHp, setUser
         <div>
           {winner === "User" ? (
             <>
-              <h2 id="winner-text">Winner: {userPokemonName}</h2>
+              <h2 id="winner-text">Winner: {userPokemonName}
+                <br></br>
+                <h3>The wild pokemon was added to your collection!</h3>
+              </h2>
+
               <button onClick={capturePokemon}>Back to location selection</button>
             </>
           ) : (
